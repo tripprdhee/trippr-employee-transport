@@ -1,0 +1,12 @@
+.date-picker-container{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+
+}
+.react-datepicker__time-container {
+    color: black;
+}
+

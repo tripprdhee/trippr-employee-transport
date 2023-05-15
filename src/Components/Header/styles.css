@@ -1,0 +1,144 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #1e1e1e;
+  height: 75px;
+  width: 100%;
+}
+
+#navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+#navbar li {
+  list-style: none;
+  padding: 0 20px;
+  position: relative;
+  color: #000000;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#navbar li a {
+  text-decoration: none;
+  color: #ffffff !important;
+}
+
+#navbar li a.active::after {
+  color: #ffc107 !important;
+}
+
+#navbar li a:hover {
+  color: #ffc107 !important;
+  cursor: pointer;
+}
+
+#mobile {
+  display: none !important;
+}
+
+#mobile i {
+  color: #ffc107 !important;
+  align-items: center;
+}
+
+.menu-title {
+  color: #000;
+  margin: 0px !important;
+  color: #000;
+  font-weight: 600;
+  font-size: 20px;
+  text-transform: capitalize;
+  margin: 0px !important;
+  padding: 5px;
+  margin-top: 0;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.contact-button {
+  padding: 8px 24px;
+  gap: 10px;
+  background: #ffc107;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  border: none;
+  color: #000000;
+}
+
+.user-info {
+  background: #f7bc07;
+  width: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+  padding-top: 5px;
+  padding-top: 5px;
+}
+
+.logo-container {
+  align-self: flex-start;
+}
+
+.logo-container img {
+  width: 170px;
+}
+
+@media screen and (max-width: 767px) {
+  .logo-container img {
+    width: 140px;
+  }
+  #navbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    position: fixed;
+    top: 90px;
+    right: -300px;
+    width: 140px;
+    height: auto;
+    background-color: #8c8b8b;
+    padding: 30px 0 0 5px;
+    transition: 0.4s;
+  }
+
+  #navbar.active {
+    right: 0px;
+    z-index: 1;
+    transition: 0.6s;
+    border-radius: 16px;
+  }
+
+  #mobile {
+    display: block !important;
+  }
+
+  #navbar li {
+    margin-bottom: 20px;
+  }
+
+  #mobile i {
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .contact-button {
+    white-space: nowrap;
+    padding: 7px 7px !important;
+  }
+
+  .user-info {
+    margin-left: 21px;
+  }
+}

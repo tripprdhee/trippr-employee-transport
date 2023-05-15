@@ -1,0 +1,49 @@
+.sideBarContainer{
+    height: 100% ;
+    width: 100%;
+    margin:0;
+    padding: 0;
+}
+.sidebar_mainHeader{
+    margin-bottom: 50px;
+}
+.sidebar_mainHeader img{
+    width: 90%;
+}
+
+.sideBar{
+    height: 91% !important;
+    width: 100%;
+}
+
+.flex-column{
+    height: 50%;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+.flex-column p{
+    color: #686868;
+    width: 70%;
+}
+.colSidebar{
+    height: 100% !important;
+}
+.colRightBar{
+    background-color: #1E1E1E;
+    border-left: solid 2px #f7bc07;
+}
+.nav-link{
+color: #686868;
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 24px;
+display: flex;
+gap: 15px;
+width: 70%;
+}
+.nav-link:focus, .nav-link:hover{
+    color: #FF5151;
+}

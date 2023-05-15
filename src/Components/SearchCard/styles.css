@@ -1,0 +1,285 @@
+.input-container input {
+  color: #f1f1f1;
+}
+
+#destinationHead {
+  color: #f1f1f1;
+  margin: 0;
+}
+.search-card-container {
+  width: 1409px;
+  height: 180px;
+  background: linear-gradient(
+    122.1deg,
+    rgba(241, 241, 241, 0.1806) 31.07%,
+    rgba(235, 235, 235, 0.042) 61.29%
+  );
+  box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  align-self: center;
+  margin-top: 1%;
+  position: relative;
+  backdrop-filter: blur(20px);
+
+  border-radius: 60px;
+}
+
+.trip-type-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  width: 100%;
+}
+
+.trip-type-active {
+  width: 187px;
+  height: 40px;
+  background: #ffc107;
+  box-shadow: -3px 5px 9px rgb(0 0 0 / 25%);
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+  padding: 7px 15px;
+}
+
+.trip-type {
+  width: 200px;
+  height: 40px;
+  background: #bababa;
+  box-shadow: -3px 5px 9px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  cursor: pointer;
+}
+
+.trip-type-title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  color: #353535;
+  text-shadow: -2px 4px 8px rgba(0, 0, 0, 0.29);
+  margin: 0;
+}
+
+.location-title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  text-shadow: -5px 5px 7px rgba(0, 0, 0, 0.25);
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 40px 20px;
+  border-radius: 67px;
+}
+
+.calender {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.fillDiv {
+  margin-left: 12px;
+  border-bottom: 3px solid rgba(121, 113, 113, 0.63);
+}
+
+.fillDiv input {
+  font-size: 14px;
+}
+
+.calender-container {
+  border-bottom: 3px solid rgba(121, 113, 113, 0.63);
+}
+
+.calender-container h5 {
+  font-size: 14px;
+  margin: 0;
+  color: #ffc107;
+}
+
+.datediv {
+  width: 200px;
+  margin-left: 1px;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.calender-item ::placeholder {
+  font-size: 12px;
+}
+
+.right-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.left-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.date-input {
+  margin-top: 4px;
+}
+
+.google-auto-complete {
+  border: none;
+  background-color: transparent;
+  outline: transparent;
+  width: 100%;
+  color: #000;
+}
+
+.row-containers {
+  display: flex;
+}
+
+.calender-icon {
+  margin-right: 15px;
+}
+
+.explore-btn {
+  position: absolute;
+  left: 40%;
+  top: 175px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.seats-input {
+  width: 100%;
+  background-color: transparent !important;
+  outline: none !important;
+  border: none;
+}
+#my-dropdown {
+  background: transparent;
+  border: transparent;
+  color: #939191;
+}
+
+@media only screen and (max-width: 767px) {
+  .calender-container h5 {
+    color: #1e1e1e;
+  }
+  #destinationHead {
+    color: #464444;
+  }
+  .input-container input {
+    color: #464444;
+  }
+  .disDiv h1 {
+    font-size: 20px;
+  }
+  .disDiv {
+    margin-top: 125px;
+  }
+  .search-card-container {
+    align-self: center;
+    background: #f1f1f1;
+    border-radius: 25px;
+    box-shadow: -6px 8px 11pxrgba (0, 0, 0, 0.25);
+    margin-top: 1%;
+    position: relative;
+    width: 390px !important;
+  }
+
+  .trip-type-active {
+    width: 160px;
+    height: 40px;
+    padding: 0;
+  }
+  .trip-type-container {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .location-title,
+  .trip-type-title {
+    color: black;
+    align-items: center;
+    display: flex;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    line-height: normal;
+    padding: 5px;
+    margin: 0;
+  }
+
+  .input-container {
+    align-items: center;
+    background: #f1f1f1;
+    border-radius: 25px;
+    box-shadow: -6px 8px 11pxrgba (0, 0, 0, 0.25);
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+    flex-wrap: wrap;
+    width: 100% !important;
+    flex-direction: column;
+  }
+
+  .calender-container {
+    border-bottom: 3pxsolidhsla (0, 3%, 46%, 0.63);
+    margin: 10px 10px 25px 10px !important;
+  }
+
+  .trip-type {
+    background: #bababa;
+    width: 160px;
+    height: 40px;
+    padding: 0;
+    margin: 0 0 0 5px;
+  }
+
+  .row-containers {
+    display: flex;
+    justify-content: space-between !important;
+  }
+
+  .explore-btn {
+    position: absolute;
+    margin-left: -12%;
+    margin-top: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .datediv {
+    margin-left: -13px;
+  }
+  .react-datepicker__time-container {
+    width: 70px;
+  }
+}

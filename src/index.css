@@ -1,0 +1,95 @@
+@font-face {
+  font-family: Raleway-Bold;
+  src: url(./Assets/fonts/Raleway-Bold.ttf);
+}
+
+@font-face {
+  font-family: Raleway-Medium;
+  src: url(./Assets/fonts/PlusJakartaSans-Medium.ttf);
+}
+
+@font-face {
+  font-family: Raleway-Regular;
+  src: url(./Assets/fonts/PlusJakartaSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: Raleway-ExtraBold;
+  src: url(./Assets/fonts/PlusJakartaSans-ExtraBold.ttf);
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  /* overflow: auto; */
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+
+  background: #1E1E1E !important;
+  color: #fafafa;
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+  list-style: none;
+  list-style-type: none;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* //custom scroll bar */
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #303030;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(51, 51, 51);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(29, 29, 29);
+}
+
+.modal-content {
+  top: 120px !important;
+}
+
+.swiper-slide {
+  height: 195px !important;
+  margin-bottom: 50px;
+  width: 195px !important;
+}
+
+.pac-container .pac-item {
+  display: flex;
+  padding: 10px;
+}
+
+.pac-container .pac-item .pac-icon {
+  display: none;
+}
+
+
+
+@media only screen and (max-width: 767px) {
+  body {
+    margin: 0px !important;
+    padding: 0px !important;
+  }
+}

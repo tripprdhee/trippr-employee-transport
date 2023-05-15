@@ -1,0 +1,45 @@
+.modalfooter {
+  display: flex !important;
+  justify-content: flex-end;
+}
+
+.custum {
+  margin-left: 9px;
+  background-color: #FFC107;
+  color: black;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  border-color: #FFC107;
+}
+
+.modaltitle p {
+  font-size: 24px !important;
+  margin: 0px !important;
+}
+
+.ReactModal__Content {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255);
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 15px;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  width: 25% !important;
+  color: black;
+}
+
+
+.modalbody p {
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+}
