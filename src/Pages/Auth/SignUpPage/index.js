@@ -63,7 +63,7 @@ const SignUpPage = () => {
         setIsLoading(false);
       });
       if (respL && respL.statusCode === 200) {
-        localStorage.setItem("token", respL.data.token);
+        localStorage.setItem("hrToken", respL.data.token);
         instance.defaults.headers.common["Authorization"] =
           "Bearer " + respL.data.token;
         localStorage.setItem("HR_LOGIN_INFO", JSON.stringify(respL.data));

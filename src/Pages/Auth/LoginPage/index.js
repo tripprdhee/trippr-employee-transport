@@ -31,7 +31,7 @@ const LoginPage = (props) => {
 
     if (resp && resp.statusCode === 200) {
       toast.success("Login SuccessFully!");
-      localStorage.setItem("token", resp.data.token);
+      localStorage.setItem("hrToken", resp.data.token);
       instance.defaults.headers.common["Authorization"] =
         "Bearer " + resp.data.token;
       localStorage.setItem("HR_LOGIN_INFO", JSON.stringify(resp.data));

@@ -80,7 +80,7 @@ const Schedule = () => {
         </div>
         <div className='logout_container'>
           <div className='routes_header'>
-            Route List - Login Shift
+            Route List - LogOut Shift
             <div className='routes_cal'>
               <CustomDatePicker
                 selected={Date.now()}
