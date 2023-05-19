@@ -67,8 +67,10 @@ const Dashboard = () => {
               dataArr?.map((item,index) => {
                 return (
                   <div className='content_para' key={index} >
+                  <div>
                     <p>{item.from} to {item.to} {item.pickupTime}</p>
                     <p id='content_people'>{item.people.men}-Men {item.people.woman}-Woman</p>
+                    </div>
                   </div>
                 )
 
@@ -98,8 +100,10 @@ const Dashboard = () => {
               dataArr?.map((item,index) => {
                 return (
                   <div className='content_para'  key={index}>
+                  <div>
                     <p>{item.from} to {item.to} {item.pickupTime}</p>
                     <p id='content_people'>{item.people.men}-Men {item.people.woman}-Woman</p>
+                    </div>
                   </div>
                 )
 
