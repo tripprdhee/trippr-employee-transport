@@ -19,7 +19,7 @@
 .flex-column{
     height: 50%;
     align-items: center;
-    gap: 30px;
+    justify-content: space-evenly;
     margin-bottom: 50px;
 }
 .flex-column p{
