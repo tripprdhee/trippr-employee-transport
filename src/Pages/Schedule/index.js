@@ -3,51 +3,18 @@ import "./style.css";
 import DatePicker from "react-datepicker";
 import downArrow from "../../Assets/png/downArrow.png";
 import CustomDatePicker from "../../Components/DatePicker";
-import { getEmployeeList } from "../../Api/employee";
+import { getEmployeeList, getScheduleBucket } from "../../Api/employee";
 
 const Schedule = () => {
-  const [datalist, setDataList] = useState([]);
+  const [routeList, setRouteList] = useState([]);
+  const [scheduleBucket, setScheduleBucket] = useState();
   const [date, setDate] = useState();
   const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in "yyyy-mm-dd" format
 
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [showEmploye, setShowEmploye] = useState(false);
   const [removedItems, setRemovedItems] = useState([]);
-  const [dataArr, setDataArr] = useState([
-    {
-      name: "Sagar",
-      address: {area:'kormangala', city: 'bengaluru', pincode:'1111' ,state:'karnataka'},
-      createdAt: "2023-05-29T10:04:58.667Z",
-      gender: 'male',
-      
-      pickupTime: "9am",
-      email: "sagar@trippr.co.in",
-      mobileNumber: "7891235463",
-      
-    },
-    {
-      name: "Sunny",
-      address: {area:'whitefield', city: 'bengaluru', pincode:'1111' ,state:'karnataka'},
-      createdAt: "2023-05-29T10:04:58.667Z",
-      gender: 'male',
-      
-      pickupTime: "9.30am",
-      email: "sunny@trippr.co.in",
-      mobileNumber: "7891235463",
-      
-    },
-    {
-      name: "Tasneem",
-      address: {area:'jayanagar', city: 'bengaluru', pincode:'1111' ,state:'karnataka'},
-      createdAt: "2023-05-29T10:04:58.667Z",
-      gender: 'male',
-      
-      pickupTime: "10am",
-      email: "tasneem@trippr.co.in",
-      mobileNumber: "7891235463",
-      
-    },
-  ]);
+  const [dataArr, setDataArr] = useState([]);
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
@@ -55,56 +22,61 @@ const Schedule = () => {
 
   const handleshow = () => {
     setShowEmploye(!showEmploye);
-    console.log("kk");
   };
 
-  console.log(datalist);
 
   const [shift, setShift] = useState([1]);
 
   const add = () => {
     const temp = shift[shift.length - 1] + 1;
     setShift([...shift, temp]);
-    console.log(shift);
+    // console.log(shift);
   };
 
-  const deleteFromDatalist = (itemname) => {
-    setDataList(datalist.filter((item) => item !== itemname));
-    const removedItem = datalist.find((item) => item === itemname);
+  const addToRoute = (item) => {
 
-    setDataArr([...dataArr, removedItem]);
+    const filteredDataArr = dataArr.filter(e => e._id !== item._id);
+    setDataArr(filteredDataArr)
+    const obj = {
+      pickUpAddress: item?.employee?.pickUpAddress,
+      pickupTime: item?.employee?.pickupTime,
+      employee: item
+    }
+    setRouteList([...routeList, obj])
+
   };
-  console.log(datalist);
 
-  const deleteFromDataArr = (itemname) => {
-    setDataArr(dataArr.filter((item) => item !== itemname));
-    setDataList([...datalist, itemname]);
+  const removeFromRoute = (item) => {
+    const filteredDataArr = routeList.filter((e) => e.employee.email !== item.employee.email)
+    setRouteList(filteredDataArr)
+    setDataArr([...dataArr, item])
+
   };
 
-  // const dataArr = [
-  //   { employeeName: "Sagar", from: "KR Puram", people: { men: 8, woman: 4 }, pickupTime: "9am", emailId: "sagar@trippr.co.in", phoneNumber: "7891235463", coordinates: "btm" },
-  //   { employeeName: "Sunny", from: "Banashankari", people: { men: 6, woman: 6 }, pickupTime: "9.30am", emailId: "sunny@trippr.co.in", phoneNumber: "7891235463", coordinates: "hsr" },
-  //   { employeeName: "Tasneem", from: "Yellahanka", people: { men: 5, woman: 6 }, pickupTime: "10am", emailId: "tasneem@trippr.co.in", phoneNumber: "7891235463", coordinates: "mico" }
-  // ]
   useEffect(() => {
-    getEmployeeData();
+    getSheduleAndEmployeeData()
   }, []);
 
-  const getEmployeeData = async () => {
+  const getSheduleAndEmployeeData = async () => {
     const res = await getEmployeeList();
-    console.log(res);
-    setDataList([...res.data]);
+    const resonse = await getScheduleBucket();
+    const { data } = await resonse
+    setRouteList(data.totalEmployees)
+    const idsToRemove = data?.totalEmployees?.map(item => item.employee._id);
+
+    // Filter out the dataArr with matching IDs
+    const filteredDataArr = res.data.filter(item => !idsToRemove.includes(item._id));
+
+    setDataArr(filteredDataArr);
   };
 
-  console.log(dataArr);
-
-  const [dataArrItem, setDataArrItem] = useState([])
 
 
-  const handleedit = () => {
+
+
+  const handleEdit = () => {
 
   }
-
   return (
     <div className="dashboard_container">
       <div className="dateContainer">
@@ -145,64 +117,28 @@ const Schedule = () => {
         <div className="lower_container">
           <div className="lower_contents">
             <p className="firstline">Employee List</p>
-            {/* <select name='employee' id='employee'>
-            {
-            // datalist.map((item,index) => {
-            //   return(
-            //     <option key={index}>
-
-            //     <p>{item.name}<span>Add</span></p>
-                
-            //      </option>
-            //   )
-            // })
-          }
-            </select> */}
             <div className="clickhere">
-            {/* <button className="employeelist" onClick={handleshow}>
-              Select employe name for the shift
-            </button>
-            </div>
-            <div className="main">
-            {showEmploye &&
-              datalist.map((item, index) => {
-                return (
-                  <div className="employezone">
-                    <div className="employedata">
-                    <p key={index}>
-                      
-                      Name : {item.name}<br/>
-                      Email : {item.email}
-                    </p>
-                    </div>
 
-
-                    <button onClick={() => deleteFromDatalist(item)}>
-                      +
-                    </button>
-                  </div>
-                );
-              })} */}
               <div className="dropdown">
-    <button onClick={() => setShowEmploye(!showEmploye)} className="dropbtn">Employee list &#8595;</button>
-    <div className="dropdown-content" style={{display: showEmploye? 'block':'none'}}>
-    {datalist.map((item,index) => {
-    return (
-      <div className="employedetails">
-        <div className="right">
-      <p>Name : {item.name}<br/>
-      Email : {item.email}</p><br/>
-      </div>
-      <div className="left">
-      <span onClick={() => deleteFromDatalist(item)}>+</span>
-      </div>
-      </div>
-      
-    )
-  })}
-    </div>
-    </div>
+                <button onClick={handleshow} className="dropbtn">Employee list &#8595;</button>
+                <div className="dropdown-content" style={{ display: showEmploye ? 'block' : 'none' }}>
+                  {dataArr.map((item, index) => {
+                    return (
+                      <div className="employedetails" key={index}>
+                        <div className="right">
+                          <p>Name : {item.name ? item.name : item.employee.name }<br />
+                            Email : {item.email ? item.email : item.employee.email}</p>
+                        </div>
+                        <div className="left">
+                          <span onClick={() => addToRoute(item)}>+</span>
+                        </div>
+                      </div>
+
+                    )
+                  })}
+                </div>
               </div>
+            </div>
           </div>
           <div className="lower_contents">
             <p className="firstline">Pickup Point</p>
@@ -227,36 +163,37 @@ const Schedule = () => {
             </div>
           </div>
           <div className="routes_content">
-            
-            {dataArr?.map((item, index) => {
-              return (
-                <div className="content_para" key={index}>
-                  
+
+            {
+              routeList?.map((item, index) => {
+                return (
+                  <div className="content_para" key={index}>
+
                     <div className="upper">
-                    <p>
-                      {item.address.area} - {item.from} - {item.pickupTime}
-                    </p>
-                    <p id="content_people">
-                      {item.mobile} ---- {item.email} ---- {item.coordinates}{" "}
-                    </p>
+                      <div className="editableDiv">
+                        {item.employee.name.toUpperCase()} --
+                        <div className="editableContent">
+                          <label>Pick Up Address</label>
+                          <input value={item.pickUpAddress} />
+                        </div>
+                        <div className="editableContent">
+                          <label>Pick Up Time</label>
+                          <input value={item.pickupTime} />
+                        </div>
+
+                      </div>
+                      <p id="content_people">
+                        {item.employee.mobileNumber} ---- {item.employee.email} ---- {item.employee.address.area}{" "}
+                      </p>
                     </div>
                     <div className="lower">
-                    <button
-                      classname="minus"
-                      onClick={() => deleteFromDataArr(item)}
-                    >
-                      -
-                    </button>
-                    <button >E</button>
+                      <button onClick={() => removeFromRoute(item)} id="minusBtn" className='far'>&#8722;</button>
+                      <button onClick={() => handleEdit(item)} style={{ fontSize: "20px", width: "fit-content" }} className='far'>&#xf044;</button>
                     </div>
-                  
-                </div>
-              );
-            })}
-          </div>
 
-          <div>
-            <p className="see_all">See All</p>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>
