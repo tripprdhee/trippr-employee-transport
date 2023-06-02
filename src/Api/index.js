@@ -4,7 +4,7 @@ const instance = axios.create({
   // baseURL: "https://trippr-prod-api.herokuapp.com/api/v1/",
   // baseURL: "https://trippr-devlopment.herokuapp.com/api/v1/",
   //  baseURL:"https://devapi.trippr.co.in/api/v1/"
-   baseURL: "https://dev-api-56zl7.ondigitalocean.app/api/v1/",
+   baseURL: "https://trippr-dev-64zvm7t2wa-em.a.run.app/api/v1/",
   // baseURL: "https://prod-api-lfvfx.ondigitalocean.app/api/v1",
 });
 
