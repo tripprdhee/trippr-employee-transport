@@ -1,277 +1,324 @@
-
-.dateContainer input{
-    color: #EEE61D;
-    background: rgb(88 88 88);
-    border-radius: 10px;
-    text-align: center;
-    border: none;
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
-}
-.date-picker-shedule:focus{
-    border: none;
-}
-.dateContainer{
-    display: flex;
-}
-.dateContainer img{
-    width: 35px;
+.dateContainer input {
+  color: #EEE61D;
+  background: rgb(88 88 88);
+  border-radius: 10px;
+  text-align: center;
+  border: none;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
 }
 
-.shiftsAdd h2{
-    color: white;
+.date-picker-shedule:focus {
+  border: none;
 }
+
+.dateContainer {
+  display: flex;
+}
+
+.dateContainer img {
+  width: 35px;
+}
+
+.shiftsAdd h2 {
+  color: white;
+}
+
 button {
-    width: 4vw;
+  width: 4vw;
 }
 
 #content_number {
-    font-size: 16px;
-    font-weight: 500;
+  font-size: 16px;
+  font-weight: 500;
 }
+
 .firstline {
-    font-family: 'Raleway';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 17.9443px;
-    line-height: 34px;
-    margin: 0;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17.9443px;
+  line-height: 34px;
+  margin: 0;
 }
- #content_number {
-    font-size: 38px;
-    margin-top: 1rem;
- }
 
- #content_shift {
-    font-weight: 500;
-    font-size: 14.506px;
-    line-height: 29px;
-    margin-top: 2rem;
-    color: blue;
- }
-
- .employename {
-    display: flex;
-    justify-content: space-around;
- }
-
- .employename button {
-    width: 7vw;
-    border: 1px solid red;
-    border-radius: 20px;
- }
- p span {
-    margin-left: 1rem;
-    border: 1px solid red;
- } 
-
- button.employeelist{
-    width: 17.7rem;
-    border: 1px solid black;
-    border-radius: 6px;
- }
-
- .employezone {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
- }
-
- .employezone button {
-    width: 2vw;
-    border: 1px solid black;
-    border-radius: 30px;
-    background: blanchedalmond;
+#content_number {
+  font-size: 38px;
+  margin-top: 1rem;
 }
- 
 
- .content_para button {
-    border: 0
+#content_shift {
+  font-weight: 500;
+  font-size: 14.506px;
+  line-height: 29px;
+  margin-top: 2rem;
+  color: blue;
+}
+
+.employename {
+  display: flex;
+  justify-content: space-around;
+}
+
+.employename button {
+  width: 7vw;
+  border: 1px solid red;
+  border-radius: 20px;
+}
+
+p span {
+  margin-left: 1rem;
+  border: 1px solid red;
+}
+
+button.employeelist {
+  width: 17.7rem;
+  border: 1px solid black;
+  border-radius: 6px;
 }
 
 .employezone {
-    background: aquamarine;
-    display: flex;
-    justify-content:space-between;
-    align-items: center;
-    border: 1px solid black;
-    padding: 2px;
-    z-index: 1;
-    border-radius: 5px;
-    width: 17.9rem;
-    height: 40px;
-    border-top: none;
-    position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.employezone button {
+  width: 2vw;
+  border: 1px solid black;
+  border-radius: 30px;
+  background: blanchedalmond;
+}
+
+
+.content_para button {
+  border: 0
+}
+
+.employezone {
+  background: aquamarine;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  padding: 2px;
+  z-index: 1;
+  border-radius: 5px;
+  width: 17.9rem;
+  height: 40px;
+  border-top: none;
+  position: relative;
 }
 
 .employezone p {
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1.5;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
 }
+
 .clickhere {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .upper-lower {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
+
 .dropbtn {
-    background-color: #ffc107;
-    color: white;
-    padding: 8px 16px;
-    font-family: "Raleway";
-    font-weight: 600;
-    font-size: 20px;
-    border: none;
-    cursor: pointer;
-    margin-top: 24px;
-    width: 17rem;
-    height: 3rem;
-    border-radius: 10px;
-    border: 2px solid black;
-  }
+  background-color: #ffc107;
+  color: white;
+  padding: 8px 16px;
+  font-family: "Raleway";
+  font-weight: 600;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  margin-top: 24px;
+  width: 17rem;
+  height: 3rem;
+  border-radius: 10px;
+  border: 2px solid black;
+}
 
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #1e1e1e;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-  }
-  
-  .dropdown-content p {
-    color: #ffc107;
-    font-family: "Raleway";
-    font-weight: 500;
-    line-height: 20px;
-    text-decoration: none;
-    display: block;
-    margin: 0;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .dropdown-content p:hover {
-    background-color: #f1f1f1;
-  }
-  
-  
-  
-  .dropdown:hover .dropbtn {
-    background-color: #ffc107;
-  }
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  .left{
-    width: 24px;
-  }
-  .left span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    border: 1px solid black;
-    background: cadetblue;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .employedetails {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    width: 17rem;
-    border: 1px solid yellow;
-    height: 70px;
-    justify-content: space-between;
-    
-  }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
-  span:hover {
-    background-color: #ffc107;
-  }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1e1e1e;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
 
-  .slots{
-    margin: 20px 0 20px 0;
-  }
-  .slots button{
-    width: 20px;
-    height: 24px;
-  }
-  #shift{
-    background-color: #FFEFE7;
-    border-radius: 5px;
-    width: 126px;
-    height: 40px;
-    font-family: 'Raleway';
-    font-style: normal;
-    font-weight: 700;
-  }
-  .shiftsAdd{
-    margin-top: 50px;
-  }
+.dropdown-content p {
+  color: #ffc107;
+  font-family: "Raleway";
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration: none;
+  display: block;
+  margin: 0;
+  cursor: pointer;
+  font-size: 14px;
+}
 
-  #minusBtn{
-    font-size: 20px;
-    border: 0.5px solid;
-    width: 27px;
-    border-radius: 26px;
-  }
+.dropdown-content p:hover {
+  background-color: #f1f1f1;
+}
 
-  .upper{
-    width: 90%;
-  }
-  .lower{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .editableDiv{
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom:20px
-  }
-  .editableDiv label{
-    color: #e3540d;
-  }
-  .editableContent{
-    display: flex;
-    flex-direction: column;
-  }
-  .editableContent {
-    position: relative;
-  }
-  
-  .editableContent span {
-    display: inline-block;
-    transition: 0.3s;
-  }
-  
-  .editableContent input {
-    transition: 0.3s;
-    border: none;
-    background: transparent;
-  }
-  
-  .editableContent:hover span,
-  .editableContent:hover input {
-    border-radius: 10px;
-    padding-left:15px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border: none;
-    background: #FFEFE7;
-  }
+
+
+.dropdown:hover .dropbtn {
+  background-color: #ffc107;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.left {
+  width: 24px;
+}
+
+.left span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: 1px solid black;
+  background: cadetblue;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.employedetails {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  width: 17rem;
+  border: 1px solid yellow;
+  height: 70px;
+  justify-content: space-between;
+
+}
+
+span:hover {
+  background-color: #ffc107;
+}
+
+.slots {
+  margin: 20px 0 20px 0;
+}
+
+.slots button {
+  width: 20px;
+  height: 24px;
+}
+
+#shift {
+  background-color: #FFEFE7;
+  border-radius: 5px;
+  width: 126px;
+  height: 40px;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  text-align: center;
+}
+
+.shiftsAdd {
+  display: flex;
+  margin-top: 50px;
+  justify-content: space-between;
+}
+
+.btn_div {
+  width: 140px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#submit_btn{
+  padding: 5px;
+  width: fit-content;
+  border-radius: 10px;
+  background-color: #FFEFE7;
+  font-family: "Raleway";
+  font-weight: 600;
+  line-height: 20px;
+  font-size: 18px;
+}
+#delte_btn {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 0;
+}
+
+
+#minusBtn {
+  font-size: 20px;
+  border: 0.5px solid;
+  width: 27px;
+  border-radius: 26px;
+}
+
+.upper {
+  width: 90%;
+}
+
+.lower {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.editableDiv {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 20px
+}
+
+.editableDiv label {
+  color: #e3540d;
+}
+
+.editableContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.editableContent {
+  position: relative;
+}
+
+.editableContent span {
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.editableContent input {
+  transition: 0.3s;
+  border: none;
+  background: transparent;
+}
+
+.editableContent:hover span,
+.editableContent:hover input {
+  border-radius: 10px;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: none;
+  background: #FFEFE7;
+}

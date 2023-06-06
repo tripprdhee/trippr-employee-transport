@@ -32,6 +32,7 @@
 .colRightBar{
     background-color: #1E1E1E;
     border-left: solid 2px #f7bc07;
+    position: relative;
 }
 .nav-link{
 color: #686868;

@@ -62,5 +62,15 @@ export const getScheduleBucket = async () => {
     },
   });
 };
+export const deleteScheduleBucket = async (id) => {
+  const token =  localStorage.getItem("hrToken");
+  return  baseApiCall({
+    url: `employee-transport/bucket/${id}`,
+    method: "delete",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+};
 
 
