@@ -3,19 +3,20 @@ import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import DatePicker from "react-datepicker";
 import downArrow from "../../Assets/png/downArrow.png";
-import { deleteScheduleBucket, getEmployeeList, getScheduleBucket } from "../../Api/employee";
+import { addEditScheduleBucket, deleteScheduleBucket, getEmployeeList, getScheduleBucket } from "../../Api/employee";
 import Loader from "../../Loader";
 
 const Schedule = () => {
   const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in "yyyy-mm-dd" format
-  const [routeList, setRouteList] = useState([]);
-  const [date, setDate] = useState();
+  const [routeList, setRouteList] = useState({});
   const [loading, setLoading] = useState(true);
   const [clickShift, setClickShift] = useState(1);
+  const [shift, setShift] = useState("1");
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [showEmploye, setShowEmploye] = useState(false);
   const [dataArr, setDataArr] = useState([]);
-  const [bucket,setBucket] = useState({})
+  const [formData, setFormData] = useState([]);
+
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
@@ -31,36 +32,29 @@ const Schedule = () => {
   // const add = () => {
   //   const temp = shift[shift.length - 1] + 1;
   //   setShift([...shift, temp]);
-  //   // console.log(shift);
   // };
 
   const addToRoute = (item) => {
-    // console.log("dataArr ======> ",dataArr)
     const filteredDataArr = dataArr.filter(e => e.employee._id !== item.employee._id);
     setDataArr(filteredDataArr)
-
     routeList.totalEmployees.push(item)
-    // console.log("object =============> ",routeList)
+
+
+    setFormData(routeList.totalEmployees)
+
   };
 
   const removeFromRoute = (item) => {
     const filteredDataArr = routeList?.totalEmployees?.filter((e) => e.employee.email !== item.employee.email)
-
-    routeList.totalEmployees = filteredDataArr
-    console.log("filteredDataArr ====> ", routeList)
-    // setRouteList(filteredDataArr)
+    setFormData(filteredDataArr)
+    setRouteList((e) => ({
+      ...e,
+      totalEmployees: filteredDataArr
+    }))
     setDataArr([...dataArr, item])
 
   };
 
-  // useEffect(() => {
-  //   totalSiftPresent()
-  // }, [])
-  // const totalSiftPresent = async () => {
-  //   const response = await getScheduleBucket();
-  //   console.log(response.data.length)
-  //    response.data.map(e =>{console.log("object")})
-  // }
   useEffect(() => {
     setLoading(true)
     getSheduleAndEmployeeData()
@@ -73,25 +67,36 @@ const Schedule = () => {
     response.data.forEach((item) => {
       shiftAllowtedList.push(...item.totalEmployees)
     })
-    // console.log("filteredDataArr ===> ",shiftAllowtedList)
 
     const data = response.data.filter(e => e.slot === `${clickShift}`)
     if (data.length === 0) {
-      setRouteList({})
+      const obj = {
+        slot: null,
+        loginTime: null,
+        logOutTime: null,
+        noOfPickup: null,
+        pickupPoint: null,
+        date: null,
+        totalEmployees: []
+      }
+      setRouteList(obj)
       setLoading(false)
       return
     }
 
     setRouteList(data[0])
+    setFormData([...data[0]?.totalEmployees])
+
+
     const idsToRemove = shiftAllowtedList?.map(item => item.employee._id);
 
     // Filter out the dataArr with matching IDs
     const filteredDataArr = res.data.filter(item => !idsToRemove.includes(item._id));
-    console.log("filteredDataArr ===> ", filteredDataArr)
     const arr = filteredDataArr.map((e) => {
       return {
-        pickUpAddress: "",
-        pickupTime: "",
+        pickUpAddress: null,
+        dropAddress: null,
+        pickupTime: null,
         employee: e
       }
     });
@@ -101,27 +106,178 @@ const Schedule = () => {
 
     setLoading(false)
   };
-
-
-
-
+  // console.log("routeList ==========> ", formData)
 
   const handleShiifts = (e) => {
     e.preventDefault()
     setClickShift(e.target.value)
+    setShift(e.target.value)
+  }
+  const handleEdit = () => {
 
   }
-  const handleEdit = (e) => {
-    e.preventDefault()
+
+  const handleChange = (time) => {
+    setRouteList((prevRouteList) => ({
+      ...prevRouteList,
+      loginTime: time,
+    }));
+
   }
+  const handleLogOutChange = (time) => {
+    setRouteList((prevRouteList) => ({
+      ...prevRouteList,
+      logOutTime: time,
+    }));
+
+  }
+  const handlePickupAddressChange = (id, value) => {
+    const updatedEmployees = [...formData];
+    updatedEmployees.forEach((item) => {
+      if (item.employee._id === id) {
+        item.pickUpAddress = value
+      }
+    })
+    setRouteList((e) => ({
+      ...e,
+      totalEmployees: updatedEmployees
+    }))
+  };
+  const handlePickupTimeChange = (id, value) => {
+    const updatedEmployees = [...formData];
+    updatedEmployees.forEach((item) => {
+      if (item.employee._id === id) {
+        item.pickupTime = value
+      }
+    })
+    setRouteList((e) => ({
+      ...e,
+      totalEmployees: updatedEmployees
+    }))
+  };
+  const handleDropTimeChange = (id, value) => {
+    const updatedEmployees = [...formData];
+    updatedEmployees.forEach((item) => {
+      if (item.employee._id === id) {
+        item.dropTime = value
+      }
+    })
+    setRouteList((e) => ({
+      ...e,
+      totalEmployees: updatedEmployees
+    }))
+  };
+  const handleDropAddressChange = (id, value) => {
+    const updatedEmployees = [...formData];
+    updatedEmployees.forEach((item) => {
+      if (item.employee._id === id) {
+        item.dropAddress = value
+        return
+      }
+    })
+    setRouteList((e) => ({
+      ...e,
+      totalEmployees: updatedEmployees
+    }))
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const obj = {
+      loginTime: routeList.loginTime,
+      logOutTime: routeList.logOutTime,
+      date: selectedDate,
+      slot: shift,
+      noOfPickup: routeList.noOfPickup,
+      pickupPoint: routeList.pickupPoint,
+      totalEmployees: routeList.totalEmployees
+    }
+    if (!obj.loginTime) {
+      toast.error("missing login time,try again")
+      return
+    }
+    if (!obj.noOfPickup) {
+      toast.error("missing no Of Pickup,try again")
+      return
+    }
+    if (!obj.logOutTime) {
+      toast.error("missing logOut Time,try again")
+      return
+    }
+    if (!obj.date) {
+      toast.error("missing date,try again")
+      return
+    }
+    if (!obj.slot) {
+      toast.error("missing slot,try again")
+      return
+    }
+    if (!obj.pickupPoint) {
+      toast.error("missing pickup Point,try again")
+      return
+    }
+    if (obj.totalEmployees.length === 0) {
+      toast.error("Add Employees")
+      return
+    } else {
+      let valid = true
+      obj.totalEmployees.map((e) => {
+        if (!e.pickupTime) {
+          toast.error("missing pickup Time,try again")
+          valid = false
+          return
+        }
+        if (!e.dropTime) {
+          toast.error("missing drop Time,try again")
+          valid = false
+          return
+        }
+        if (!e.pickUpAddress) {
+          toast.error("missing pick Up Address,try again")
+          valid = false
+          return
+        }
+        if (!e.dropAddress) {
+          toast.error("missing drop Addresst,try again")
+          valid = false
+          return
+        }
+      })
+      if(!valid) return
+    }
+    console.log(obj)
+
+    const resp = await addEditScheduleBucket(obj)
+    if (resp.success !== true) {
+      toast.error("Try Again")
+    } else {
+      toast.success("SuccessFull")
+    }
+
+  }
+
   const handleDelete = async (e) => {
     e.preventDefault()
     setLoading(true)
+    if(!routeList._id){
+      toast.error("Nothing to Delete")
+    setLoading(false)
+
+    }
     const response = await deleteScheduleBucket(routeList?._id)
-    console.log(response)
     if (response.success === true) {
       setLoading(false)
-      setRouteList({})
+      const obj = {
+        slot: null,
+        loginTime: null,
+        logOutTime: null,
+        noOfPickup: null,
+        pickupPoint: null,
+        date: null,
+        totalEmployees: []
+      }
+      setRouteList(obj)
       toast.success(response.message)
     } else {
       setLoading(false)
@@ -146,7 +302,7 @@ const Schedule = () => {
         <div className="shiftsAdd">
           <h2>Add Shift</h2>
           <div className="btn_div">
-            <button onClick={handleEdit} id="submit_btn">SUBMIT</button>
+            <button onClick={handleSubmit} id="submit_btn">SUBMIT</button>
             <button onClick={handleDelete} style={{ fontSize: "20px" }} className='far' id="delte_btn">&#xf2ed;</button>
           </div>
         </div>
@@ -169,15 +325,35 @@ const Schedule = () => {
             <div className="upper_contents">
               <p className="first-line">Login Time</p>
 
-              <input id="content_number" value={routeList?.loginTime} name="loginTime"/>
+              <DatePicker
+                placeholderText={new Date(routeList.loginTime).toLocaleTimeString([], { timeStyle: 'short' })}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={5}
+                timeCaption="Time"
+                dateFormat="h:mm aa"
+                id="content_number" onChange={handleChange} />
             </div>
             <div className="upper_contents">
               <p className="firstline">No. of Pickup</p>
-              <p id="content_number">12</p>
+              <input type="number" id="content_number" value={routeList?.noOfPickup} onChange={(e) => {
+                setRouteList((prev) => ({
+                  ...prev,
+                  noOfPickup: e.target.value
+                }))
+              }} />
             </div>
             <div className="upper_contents">
               <p className="firstline">LogOut Time</p>
-              <p id="content_number">{routeList?.logOutTime}</p>
+              <DatePicker
+                id="content_number"
+                placeholderText={new Date(routeList.logOutTime).toLocaleTimeString([], { timeStyle: 'short' })}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={5}
+                timeCaption="Time"
+                dateFormat="h:mm aa"
+                onChange={handleLogOutChange} />
             </div>
           </div>
           <div className="lower_container">
@@ -209,8 +385,12 @@ const Schedule = () => {
             </div>
             <div className="lower_contents">
               <p className="firstline">Pickup Point</p>
-              <p id="content_number">12</p>
-              <p id="content_gender">Select Loctions</p>
+              <input type="number" id="content_number" value={routeList?.pickupPoint} onChange={(e) => {
+                setRouteList((prev) => ({
+                  ...prev,
+                  pickupPoint: e.target.value
+                }))
+              }} />
             </div>
           </div>
         </div>
@@ -232,11 +412,19 @@ const Schedule = () => {
                           {item.employee.name.toUpperCase()} --
                           <div className="editableContent">
                             <label>Pick Up Address</label>
-                            <input value={item.pickUpAddress} />
+                            <input value={item.pickUpAddress} onChange={(e) => handlePickupAddressChange(item.employee._id, e.target.value)} />
                           </div>
                           <div className="editableContent">
                             <label>Pick Up Time</label>
-                            <input value={item.pickupTime} />
+                            <DatePicker
+                              placeholderText={new Date(item.pickupTime).toLocaleTimeString([], { timeStyle: 'short' })}
+                              showTimeSelect
+                              showTimeSelectOnly
+                              timeIntervals={5}
+                              timeCaption="Time"
+                              dateFormat="h:mm aa"
+                              onChange={(e) => handlePickupTimeChange(item.employee._id, e)}
+                            />
                           </div>
 
                         </div>
@@ -272,11 +460,19 @@ const Schedule = () => {
                           {item.employee.name.toUpperCase()} --
                           <div className="editableContent">
                             <label>Drop Address</label>
-                            <input value={item.pickUpAddress} />
+                            <input value={item.dropAddress} name="dropAddress" onChange={(e) => handleDropAddressChange(item.employee._id, e.target.value)} />
                           </div>
                           <div className="editableContent">
                             <label>Drop Time</label>
-                            <input value={item.pickupTime} />
+                            <DatePicker placeholderText={new Date(item.dropTime).toLocaleTimeString([], { timeStyle: 'short' })}
+                              showTimeSelect
+                              showTimeSelectOnly
+                              timeIntervals={5}
+                              timeCaption="Time"
+                              dateFormat="h:mm aa"
+                              onChange={(e) => handleDropTimeChange(item.employee._id, e)}
+
+                            />
                           </div>
 
                         </div>
@@ -302,3 +498,6 @@ const Schedule = () => {
 };
 
 export default Schedule;
+// const dateTime = new Date(routeList.loginTime);
+// const timeOnly = dateTime.toLocaleTimeString([], { timeStyle: 'short' });
+// console.log(timeOnly);

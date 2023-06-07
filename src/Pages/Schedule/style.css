@@ -30,11 +30,6 @@ button {
   width: 4vw;
 }
 
-#content_number {
-  font-size: 16px;
-  font-weight: 500;
-}
-
 .firstline {
   font-family: 'Raleway';
   font-style: normal;
@@ -47,6 +42,18 @@ button {
 #content_number {
   font-size: 38px;
   margin-top: 1rem;
+  font-weight: 500;
+  width: 90%;
+  cursor: pointer;
+}
+
+#content_number:hover{
+  border-radius: 10px;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: none;
+  background: #fcd9c7;
 }
 
 #content_shift {
@@ -322,3 +329,9 @@ span:hover {
   border: none;
   background: #FFEFE7;
 }
+.details_mainContainer input{
+  transition: 0.3s;
+  border: none;
+  background: transparent;
+}
+

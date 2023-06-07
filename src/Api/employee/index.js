@@ -50,6 +50,19 @@ export const deleteEmployeeList = async (id) => {
     },
   });
 };
+export const addEditScheduleBucket = async (data) => {
+  const res =  localStorage.getItem("HR_LOGIN_INFO");
+  const hr = JSON.parse(res)
+  const token =  localStorage.getItem("hrToken");
+  return  baseApiCall({
+    url: `employee-transport/bucket/schedule/${hr._id}/add`,
+    method: "post",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+    data
+  });
+};
 export const getScheduleBucket = async () => {
   const res =  localStorage.getItem("HR_LOGIN_INFO");
   const hr = JSON.parse(res)

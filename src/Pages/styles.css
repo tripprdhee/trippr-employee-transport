@@ -20,6 +20,7 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
+    align-items: center;
     width: 30%;
     height: 198px;
     border-radius: 15px;
@@ -28,6 +29,8 @@
 }
 
 .upper_contents p {
+    width: 100%;
+    text-align: start;
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 700;
@@ -73,6 +76,7 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
+    align-items: center;
     width: 35%;
     height: 200px;
     border-radius: 15px;
@@ -81,6 +85,8 @@
 }
 
 .lower_contents p {
+    width: 100%;
+    text-align: start;
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 700;
