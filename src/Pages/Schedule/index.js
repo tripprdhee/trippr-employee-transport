@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./style.css";
 import { ToastContainer, toast } from 'react-toastify';
 import DatePicker from "react-datepicker";
-import downArrow from "../../Assets/png/downArrow.png";
+import "react-datepicker/dist/react-datepicker.css";
 import { addEditScheduleBucket, deleteScheduleBucket, getEmployeeList, getScheduleBucket } from "../../Api/employee";
 import Loader from "../../Loader";
+import moment from "moment";
 
 const Schedule = () => {
   const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in "yyyy-mm-dd" format
@@ -57,19 +58,32 @@ const Schedule = () => {
 
   useEffect(() => {
     setLoading(true)
-    getSheduleAndEmployeeData()
-  }, [clickShift]);
+    getSheduleAndEmployeeData(selectedDate)
+  }, [clickShift, selectedDate]);
 
-  const getSheduleAndEmployeeData = async () => {
+  const getSheduleAndEmployeeData = async (scheduleDate) => {
     const res = await getEmployeeList();
-    const response = await getScheduleBucket();
-    const shiftAllowtedList = []
-    response.data.forEach((item) => {
-      shiftAllowtedList.push(...item.totalEmployees)
-    })
+    const resp = await getScheduleBucket();
 
-    const data = response.data.filter(e => e.slot === `${clickShift}`)
-    if (data.length === 0) {
+    const response = await resp.data.filter(e => {
+      const momentDate1 = moment(e.date, moment.ISO_8601, true);
+      const momentDate2 = moment(scheduleDate, moment.ISO_8601, true);
+      const formattedDate1 = momentDate1.format("YYYY-MM-DD");
+      const formattedDate2 = momentDate2.format("YYYY-MM-DD");
+
+      return formattedDate1 === formattedDate2
+    })
+    if (response.length === 0) {
+      console.log(res)
+      const arr = res.data.map((e) => {
+        return {
+          pickUpAddress: null,
+          dropAddress: null,
+          pickupTime: null,
+          employee: e
+        }
+      });
+      setDataArr(arr)
       const obj = {
         slot: null,
         loginTime: null,
@@ -84,14 +98,50 @@ const Schedule = () => {
       return
     }
 
+    const shiftAllowtedList = []
+    await response.forEach((item) => {
+      shiftAllowtedList.push(...item.totalEmployees)
+    })
+    const data = await response.filter(e => e.slot === `${clickShift}`)
+    if (data.length === 0) {
+      const obj = {
+        slot: null,
+        loginTime: null,
+        logOutTime: null,
+        noOfPickup: null,
+        pickupPoint: null,
+        date: null,
+        totalEmployees: []
+      }
+      const idsToRemove = shiftAllowtedList?.map(item => item.employee._id);
+      // console.log("idsToRemove",idsToRemove)
+      const filteredDataArr = res.data.filter(item => !idsToRemove.includes(item._id));
+      const arr = filteredDataArr.map((e) => {
+        return {
+          pickUpAddress: null,
+          dropAddress: null,
+          pickupTime: null,
+          employee: e
+        }
+      });
+
+      setDataArr(arr)
+      setRouteList(obj)
+      setLoading(false)
+      return
+    }
+
     setRouteList(data[0])
     setFormData([...data[0]?.totalEmployees])
 
 
+
     const idsToRemove = shiftAllowtedList?.map(item => item.employee._id);
+
 
     // Filter out the dataArr with matching IDs
     const filteredDataArr = res.data.filter(item => !idsToRemove.includes(item._id));
+
     const arr = filteredDataArr.map((e) => {
       return {
         pickUpAddress: null,
@@ -184,6 +234,7 @@ const Schedule = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
     const obj = {
       loginTime: routeList.loginTime,
       logOutTime: routeList.logOutTime,
@@ -244,25 +295,26 @@ const Schedule = () => {
           return
         }
       })
-      if(!valid) return
+      if (!valid) return
     }
     console.log(obj)
 
     const resp = await addEditScheduleBucket(obj)
-    if (resp.success !== true) {
-      toast.error("Try Again")
-    } else {
-      toast.success("SuccessFull")
+    if (resp) {
+      if (resp.success !== true) {
+        toast.success("SuccessFull")
+        setLoading(false)
+      }
     }
-
+    setLoading(false)
   }
 
   const handleDelete = async (e) => {
     e.preventDefault()
     setLoading(true)
-    if(!routeList._id){
+    if (!routeList._id) {
       toast.error("Nothing to Delete")
-    setLoading(false)
+      setLoading(false)
 
     }
     const response = await deleteScheduleBucket(routeList?._id)
@@ -409,7 +461,10 @@ const Schedule = () => {
 
                       <div className="upper">
                         <div className="editableDiv">
-                          {item.employee.name.toUpperCase()} --
+                          <div className="editableContent">
+                            <label>Employee</label>
+                            {item.employee.name.toUpperCase()}
+                          </div>
                           <div className="editableContent">
                             <label>Pick Up Address</label>
                             <input value={item.pickUpAddress} onChange={(e) => handlePickupAddressChange(item.employee._id, e.target.value)} />
@@ -428,13 +483,23 @@ const Schedule = () => {
                           </div>
 
                         </div>
-                        <p id="content_people">
-                          {item.employee.mobileNumber} ---- {item.employee.email} ---- {item.employee.address.area}{" "}
-                        </p>
+                        <div className="editableDiv">
+                        <div className="editableContent">
+                            <label>Mobile Number</label>
+                            {item.employee.mobileNumber}
+                          </div>
+                        <div className="editableContent">
+                            <label>Email</label>
+                            {item.employee.email}
+                          </div>
+                        <div className="editableContent">
+                            <label>Recidential Area</label>
+                            {item.employee.address.area}
+                          </div>
+                        </div>
                       </div>
                       <div className="lower">
                         <button onClick={() => removeFromRoute(item)} id="minusBtn" className='far'>&#8722;</button>
-                        <button onClick={() => handleEdit(item)} style={{ fontSize: "20px", width: "fit-content" }} className='far'>&#xf044;</button>
                       </div>
 
                     </div>
@@ -457,7 +522,10 @@ const Schedule = () => {
 
                       <div className="upper">
                         <div className="editableDiv">
-                          {item.employee.name.toUpperCase()} --
+                        <div className="editableContent">
+                            <label>Employee</label>
+                            {item.employee.name.toUpperCase()}
+                          </div>
                           <div className="editableContent">
                             <label>Drop Address</label>
                             <input value={item.dropAddress} name="dropAddress" onChange={(e) => handleDropAddressChange(item.employee._id, e.target.value)} />
@@ -476,13 +544,23 @@ const Schedule = () => {
                           </div>
 
                         </div>
-                        <p id="content_people">
-                          {item.employee.mobileNumber} ---- {item.employee.email} ---- {item.employee.address.area}{" "}
-                        </p>
+                        <div className="editableDiv">
+                        <div className="editableContent">
+                            <label>Mobile Number</label>
+                            {item.employee.mobileNumber}
+                          </div>
+                        <div className="editableContent">
+                            <label>Email</label>
+                            {item.employee.email}
+                          </div>
+                        <div className="editableContent">
+                            <label>Recidential Area</label>
+                            {item.employee.address.area}
+                          </div>
+                        </div>
                       </div>
                       <div className="lower">
                         <button onClick={() => removeFromRoute(item)} id="minusBtn" className='far'>&#8722;</button>
-                        <button onClick={() => handleEdit(item)} style={{ fontSize: "20px", width: "fit-content" }} className='far'>&#xf044;</button>
                       </div>
 
                     </div>

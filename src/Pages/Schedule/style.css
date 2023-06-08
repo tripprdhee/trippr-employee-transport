@@ -303,6 +303,7 @@ span:hover {
 .editableContent {
   display: flex;
   flex-direction: column;
+  flex:1
 }
 
 .editableContent {
@@ -318,6 +319,7 @@ span:hover {
   transition: 0.3s;
   border: none;
   background: transparent;
+  width: 80%;
 }
 
 .editableContent:hover span,

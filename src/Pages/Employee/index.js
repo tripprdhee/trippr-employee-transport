@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import "../styles.css"
-import CustomDatePicker from "../../Components/DatePicker";
-import downArrow from "../../Assets/png/downArrow.png"
 import { ToastContainer, toast } from 'react-toastify';
 import { addEmployee, deleteEmployeeList, editEmployee, getEmployeeList } from '../../Api/employee';
 
 
 const Employee = () => {
-  const [date, setDate] = useState()
   const [showMore, setShowMore] = useState(false);
   const [dataList, setDataList] = useState([]);
-  const [editEmployeeList, setEditEmployeeList] = useState();
   const [EmployeeList, setEmployeeList] = useState({
     name: "",
     email: "",

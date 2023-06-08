@@ -75,6 +75,17 @@ export const getScheduleBucket = async () => {
     },
   });
 };
+export const getDashboardBucket = async (data) => {
+  const token =  localStorage.getItem("hrToken");
+  return  baseApiCall({
+    url: `employee-transport/bucket/dashboard`,
+    method: "post",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+    data
+  });
+};
 export const deleteScheduleBucket = async (id) => {
   const token =  localStorage.getItem("hrToken");
   return  baseApiCall({

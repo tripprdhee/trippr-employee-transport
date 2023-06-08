@@ -11,6 +11,9 @@
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
 }
+.loader-container img{
+    margin-top: -320px;
+}
 
 
 @keyframes spin {
