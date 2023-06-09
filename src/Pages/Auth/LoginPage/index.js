@@ -16,7 +16,7 @@ const LoginPage = (props) => {
   let navigate = useNavigate();
 
   const getHomePage = () => {
-    navigate("/signup");
+    navigate("/");
   };
 
   const onSubmit = async (e) => {
@@ -36,7 +36,7 @@ const LoginPage = (props) => {
         "Bearer " + resp.data.token;
       localStorage.setItem("HR_LOGIN_INFO", JSON.stringify(resp.data));
       setIsLoading(false);
-        navigate("/");
+        navigate("/home");
       
     } else {
       setIsLoading(false);

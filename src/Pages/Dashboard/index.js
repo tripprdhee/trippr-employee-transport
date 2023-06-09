@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "../styles.css"
 import Loader from "../../Loader";
 import { getDashboardBucket, getEmployeeList } from '../../Api/employee';
+import { toast } from 'react-toastify';
 
 const Dashboard = () => {
   const [showMore, setShowMore] = useState(false);
@@ -21,7 +22,10 @@ const Dashboard = () => {
 
   const fetchBucket = async (date) => {
     setLoading(true)
-    const res = await getDashboardBucket({ date: date })
+    const res = await getDashboardBucket({ date: date }).catch(e =>{
+      setLoading(false)
+    })
+   
     if (res.totalEmployees) {
       setBucket(res)
     }
@@ -29,23 +33,24 @@ const Dashboard = () => {
     res.details.forEach((e) => {
       arr.push(...e.totalEmployees)
     })
-setTotalEmployee([...arr])
+    setTotalEmployee([...arr])
     setLoading(false)
+
   }
   const handleClick = () => {
     setShowMore(!showMore);
   };
-  
+
   return (
     <div className='dashboard_container'>
-    <div className="dateContainer my-4">
-          <input
-            type="date"
-            id="dateInput"
-            value={selectedDate}
-            onChange={handleDateChange}
-          />
-        </div>
+      <div className="dateContainer my-4">
+        <input
+          type="date"
+          id="dateInput"
+          value={selectedDate}
+          onChange={handleDateChange}
+        />
+      </div>
       {
         loading && <Loader />
       }
@@ -94,34 +99,34 @@ setTotalEmployee([...arr])
 
                     <div className="upper">
                       <div className="editableDiv">
-                      <div className="editableContent">
-                            <label>Employee</label>
-                            {item.employee.name.toUpperCase()}
-                          </div>
+                        <div className="editableContent">
+                          <label>Employee</label>
+                          {item.employee.name.toUpperCase()}
+                        </div>
                         <div className="editableContent">
                           <label>Pick Up Address</label>
                           <p>{item.pickUpAddress}</p>
                         </div>
                         <div className="editableContent">
                           <label>Pick Up Time</label>
-                          <p>{ new Date(item.pickupTime).toLocaleTimeString([], { timeStyle: 'short' })}</p>
+                          <p>{new Date(item.pickupTime).toLocaleTimeString([], { timeStyle: 'short' })}</p>
                         </div>
 
                       </div>
                       <div className="editableDiv">
                         <div className="editableContent">
-                            <label>Mobile Number</label>
-                            {item.employee.mobileNumber}
-                          </div>
-                        <div className="editableContent">
-                            <label>Email</label>
-                            {item.employee.email}
-                          </div>
-                        <div className="editableContent">
-                            <label>Recidential Area</label>
-                            {item.employee.address.area}
-                          </div>
+                          <label>Mobile Number</label>
+                          {item.employee.mobileNumber}
                         </div>
+                        <div className="editableContent">
+                          <label>Email</label>
+                          {item.employee.email}
+                        </div>
+                        <div className="editableContent">
+                          <label>Recidential Area</label>
+                          {item.employee.address.area}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )
@@ -143,41 +148,41 @@ setTotalEmployee([...arr])
             Route List - LogOut Shift
           </div>
           <div className='routes_content'>
-          {
+            {
               renderedList?.map((item, index) => {
                 return (
                   <div className="content_para" key={index}>
 
                     <div className="upper">
                       <div className="editableDiv">
-                      <div className="editableContent">
-                            <label>Employee</label>
-                            {item.employee.name.toUpperCase()}
-                          </div>
+                        <div className="editableContent">
+                          <label>Employee</label>
+                          {item.employee.name.toUpperCase()}
+                        </div>
                         <div className="editableContent">
                           <label>Drop Address</label>
                           <p>{item.dropAddress}</p>
                         </div>
                         <div className="editableContent">
                           <label>Drop Time</label>
-                          <p>{ new Date(item.dropTime).toLocaleTimeString([], { timeStyle: 'short' })}</p>
+                          <p>{new Date(item.dropTime).toLocaleTimeString([], { timeStyle: 'short' })}</p>
                         </div>
 
                       </div>
                       <div className="editableDiv">
                         <div className="editableContent">
-                            <label>Mobile Number</label>
-                            {item.employee.mobileNumber}
-                          </div>
-                        <div className="editableContent">
-                            <label>Email</label>
-                            {item.employee.email}
-                          </div>
-                        <div className="editableContent">
-                            <label>Recidential Area</label>
-                            {item.employee.address.area}
-                          </div>
+                          <label>Mobile Number</label>
+                          {item.employee.mobileNumber}
                         </div>
+                        <div className="editableContent">
+                          <label>Email</label>
+                          {item.employee.email}
+                        </div>
+                        <div className="editableContent">
+                          <label>Recidential Area</label>
+                          {item.employee.address.area}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )

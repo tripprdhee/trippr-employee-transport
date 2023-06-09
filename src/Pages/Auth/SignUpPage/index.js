@@ -68,7 +68,7 @@ const SignUpPage = () => {
           "Bearer " + respL.data.token;
         localStorage.setItem("HR_LOGIN_INFO", JSON.stringify(respL.data));
 
-        navigate("/", {});
+        navigate("/home", {});
 
       } else {
         setIsLoading(false);

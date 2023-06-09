@@ -13,9 +13,9 @@ const Routing = () => {
     <Router>
       <ScrollToTop />
       <Routes>
-        <Route exact path="/" element={<HomePage />} />
-        <Route exact path="/signup" element={<SignUpPage />} />
+        <Route exact path="/" element={<SignUpPage />} />
         <Route exact path="/login" element={<LoginPage />} />
+        <Route exact path="/home" element={<HomePage />} />
         <Route exact path="/auth/forgetpassword" element={<ForgetPassword />} />
        
       </Routes>
