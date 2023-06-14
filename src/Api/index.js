@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-  //  baseURL: "https://trippr-dev-64zvm7t2wa-em.a.run.app/api/v1/",
-  baseURL: "https://trippr-production-64zvm7t2wa-em.a.run.app/api/v1/",
+   baseURL: "https://trippr-dev-64zvm7t2wa-em.a.run.app/api/v1/",
+  // baseURL: "https://trippr-production-64zvm7t2wa-em.a.run.app/api/v1/",
 });
 
 export const imageURL = "https://prod-api-lfvfx.ondigitalocean.app/files/";
