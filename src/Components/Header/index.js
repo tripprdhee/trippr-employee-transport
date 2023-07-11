@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles.css";
 // import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import LogoutModal from "../modals/LogoutModal";
-
+import LogoutImage from "../../Assets/png/Logout.svg";
 
 const Header = (props) => {
   const data = localStorage.getItem("HR_LOGIN_INFO");
@@ -25,26 +25,24 @@ const Header = (props) => {
   };
 
   return (
-    <>
+    <Fragment>
       <nav>
         <div className="logo-container d-flex justify-content-center">
-          
-            <LogoutModal
-              onLogout={() => logout()}
-              isOpen={showLogin}
-              onRequestClose={() => setShowLogin(false)}
-            />
-          
+          <LogoutModal
+            onLogout={() => logout()}
+            isOpen={showLogin}
+            onRequestClose={() => setShowLogin(false)}
+          />
         </div>
 
-        <div>
+        <div
+          className="sidebar_profile_section"
+          onClick={() => setShowLogin(true)}
+        >
           <ul id="navbar" className={clicked ? "#navbar active" : "#navbar"}>
-
             {hrData?.name ? (
               <li className="user-info">
-                <p className="menu-title" onClick={() => setShowLogin(true)}>
-                  {hrData?.name[0]}
-                </p>
+                <p className="menu-title">{hrData?.name[0]}</p>
               </li>
             ) : (
               <li>
@@ -54,13 +52,18 @@ const Header = (props) => {
               </li>
             )}
           </ul>
+          <div className="sidebar_user_details">
+            <p>{hrData?.name}</p>
+            <p>Company name</p>
+          </div>
+          <img src={LogoutImage} alt="" />
         </div>
 
         <div id="mobile" onClick={() => HandleClick()}>
           <i id="bar" className={clicked ? "fas fa-times" : "fas fa-bars"} />
         </div>
       </nav>
-    </>
+    </Fragment>
   );
 };
 export default Header;

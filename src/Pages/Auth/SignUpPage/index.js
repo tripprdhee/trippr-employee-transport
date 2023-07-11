@@ -5,6 +5,8 @@ import "../styles.css";
 import { loginAPI, signUpAPI } from "../../../Api/auth";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
+import Image from "../../../Assets/png/sign-up-image.png";
+import LogoImage from "../../../Assets/png/new-logo.svg";
 import instance from "../../../Api";
 
 const SignUpPage = () => {
@@ -20,17 +22,16 @@ const SignUpPage = () => {
 
   const navigate = useNavigate();
 
-
   const onSubmit = async (e) => {
     e.preventDefault();
-    if(!name) return toast.error("Add name")
-    if(!email) return toast.error("Add email")
-    if(!mobileNumber) return toast.error("Add mobileNumber")
-    if(!password) return toast.error("Add password")
-    if(!area) return toast.error("Add area")
-    if(!city) return toast.error("Add city")
-    if(!state) return toast.error("Add state")
-    if(!pincode) return toast.error("Add pincode")
+    if (!name) return toast.error("Add name");
+    if (!email) return toast.error("Add email");
+    if (!mobileNumber) return toast.error("Add mobileNumber");
+    if (!password) return toast.error("Add password");
+    if (!area) return toast.error("Add area");
+    if (!city) return toast.error("Add city");
+    if (!state) return toast.error("Add state");
+    if (!pincode) return toast.error("Add pincode");
 
     const data = {
       email: email,
@@ -41,16 +42,16 @@ const SignUpPage = () => {
         area: area,
         city: city,
         state: state,
-        pincode: pincode
-      }
+        pincode: pincode,
+      },
     };
     const resp = await signUpAPI(data).catch((e) => {
       toast.error(e.data.message);
     });
 
-    if (resp?.message !== 'SUCCESS') {
+    if (resp?.message !== "SUCCESS") {
       toast.error(resp.message);
-      return
+      return;
     }
     if (resp && resp.statusCode === 200) {
       toast.success("Register SuccessFully!");
@@ -69,7 +70,6 @@ const SignUpPage = () => {
         localStorage.setItem("HR_LOGIN_INFO", JSON.stringify(respL.data));
 
         navigate("/home", {});
-
       } else {
         setIsLoading(false);
       }
@@ -78,15 +78,15 @@ const SignUpPage = () => {
     }
   };
   return (
-    <div className="container-fluid bg-dark login-container">
+    <div className="login-container">
       <div className="miiddle-container">
-        <p className="title signup-title">Sign Up</p>
-        <form onSubmit={onSubmit} >
+        <img src={LogoImage} alt="" style={{ alignSelf: "flex-start" }} />
+        <h1>Sign Up</h1>
+        <form onSubmit={onSubmit}>
           <div id="signupForm">
             <div>
-              <p className="addressSignup">Your Details:-</p>
-
-              <div>
+              <div className="auth_input_div">
+                <label>Username</label>
                 <AppTextInput
                   type="text"
                   placeholder="Username"
@@ -94,7 +94,8 @@ const SignUpPage = () => {
                   onChange={(text) => setName(text.target.value)}
                 />
               </div>
-              <div>
+              <div className="auth_input_div">
+                <label>Email</label>
                 <AppTextInput
                   type="email"
                   placeholder="Email"
@@ -102,7 +103,8 @@ const SignUpPage = () => {
                   onChange={(text) => setEmail(text.target.value)}
                 />
               </div>
-              <div>
+              <div className="auth_input_div">
+                <label>Mobile Number</label>
                 <AppTextInput
                   type="text"
                   placeholder="Mobile Number"
@@ -110,7 +112,8 @@ const SignUpPage = () => {
                   onChange={(text) => setMobileNo(text.target.value)}
                 />
               </div>
-              <div>
+              <div className="auth_input_div">
+                <label>Password</label>
                 <AppTextInput
                   type="password"
                   placeholder="password"
@@ -120,9 +123,8 @@ const SignUpPage = () => {
               </div>
             </div>
             <div className="addressInputDiv">
-
-              <p className="addressSignup">Company Address:-</p>
-              <div>
+              <div className="auth_input_div">
+                <label>Area/colony(Organization's)</label>
                 <AppTextInput
                   type="text"
                   placeholder="Area/colony"
@@ -130,7 +132,8 @@ const SignUpPage = () => {
                   onChange={(text) => setArea(text.target.value)}
                 />
               </div>
-              <div>
+              <div className="auth_input_div">
+                <label>City(Organization's)</label>
                 <AppTextInput
                   type="text"
                   placeholder="city"
@@ -138,7 +141,8 @@ const SignUpPage = () => {
                   onChange={(text) => setCity(text.target.value)}
                 />
               </div>
-              <div>
+              <div className="auth_input_div">
+                <label>State(Organization's)</label>
                 <AppTextInput
                   type="text"
                   placeholder="state"
@@ -146,7 +150,8 @@ const SignUpPage = () => {
                   onChange={(text) => setState(text.target.value)}
                 />
               </div>
-              <div>
+              <div className="auth_input_div">
+                <label>Pincode(Organization's)</label>
                 <AppTextInput
                   type="text"
                   placeholder="pincode"
@@ -159,14 +164,21 @@ const SignUpPage = () => {
 
           <ToastContainer />
           <div className="btn-container">
-            <AppButton title="Sign Up" disabled={isLoading} type="submit" />
+            <AppButton
+              title="Create account"
+              disabled={isLoading}
+              type="submit"
+            />
           </div>
           <div id="Login-text">
             <Link to="/login">
-              Already have  an account? <b style={{ color: "#FFC107" }}>Login</b>
+              Already have an account? <b style={{ color: "#605BFF" }}>Login</b>
             </Link>
           </div>
         </form>
+      </div>
+      <div className="auth_image_container">
+        <img src={Image} alt="" className="auth_image" />
       </div>
     </div>
   );

@@ -1,18 +1,28 @@
 .modalfooter {
   display: flex !important;
-  justify-content: flex-end;
+}
+
+.contanier {
+  text-align: center;
+}
+
+.footerbutton {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .custum {
   margin-left: 9px;
-  background-color: #FFC107;
-  color: black;
-
+  background-color: #0056fb;
+  font-family: "Montserrat";
+  color: #fff;
+  width: 100%;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 16px;
   line-height: 19px;
-  border-color: #FFC107;
+  padding: 16px 0;
 }
 
 .modaltitle p {
@@ -31,15 +41,14 @@
   padding: 15px;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  width: 25% !important;
+  width: 40% !important;
   color: black;
 }
 
-
 .modalbody p {
-
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 16px;
   line-height: 19px;
+  font-family: "Montserrat";
 }

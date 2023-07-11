@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import "./style.css";
+import LogoutGirl from "../../Assets/png/logout-girl1.png";
 
 const customStyles = {
   content: {
@@ -23,27 +24,25 @@ function LogoutModal(props) {
         contentLabel="Example Modal"
       >
         <div className="contanier">
-          <div className="modaltitle">
-            <p>Logout</p>
-          </div>
-          <hr />
+          <img src={LogoutGirl} alt="" />
           <div className="modalbody">
-            <p>Are you sure want to logout ?</p>
+            <p>Are you sure you want to logout ?</p>
           </div>
-          <hr />
           <div className="modalfooter">
             <div className="footerbutton">
               <button
                 className="custum btn"
+                style={{
+                  backgroundColor: "#fff",
+                  color: "#000",
+                  border: "1px solid #444",
+                }}
                 onClick={props.onRequestClose}
               >
-                cancel
+                NO
               </button>
-              <button
-                className="custum btn"
-                onClick={props.onLogout}
-              >
-                Logout
+              <button className="custum btn" onClick={props.onLogout}>
+                YES
               </button>
             </div>
           </div>

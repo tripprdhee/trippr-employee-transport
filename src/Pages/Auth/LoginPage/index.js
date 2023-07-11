@@ -6,6 +6,9 @@ import AppButton from "../../../Components/Common/Button";
 import "../styles.css";
 import { loginAPI } from "../../../Api/auth";
 import { useNavigate } from "react-router-dom";
+import Image from "../../../Assets/png/sign-in-image.png";
+import LogoImage from "../../../Assets/png/new-logo.svg";
+
 import instance from "../../../Api";
 
 const LoginPage = (props) => {
@@ -36,8 +39,7 @@ const LoginPage = (props) => {
         "Bearer " + resp.data.token;
       localStorage.setItem("HR_LOGIN_INFO", JSON.stringify(resp.data));
       setIsLoading(false);
-        navigate("/home");
-      
+      navigate("/home");
     } else {
       setIsLoading(false);
     }
@@ -49,12 +51,14 @@ const LoginPage = (props) => {
   };
 
   return (
-    <div className="container-fluid bg-dark login-container">
+    <div className="login-container">
       <div className="miiddle-container">
-        <p className="title">Sign In</p>
-        <p className="sub-title">Sign in and start managing your Employee!</p>
+        <img src={LogoImage} alt="" style={{ alignSelf: "flex-start" }} />
+        <h1 className="title">Sign In</h1>
+        <h2 className="sub-title">Sign in and start managing your Employee!</h2>
         <form onSubmit={onSubmit}>
-          <div>
+          <div className="auth_input_div">
+            <label>Email</label>
             <AppTextInput
               type="email"
               placeholder="Email"
@@ -64,7 +68,8 @@ const LoginPage = (props) => {
               required
             />
           </div>
-          <div>
+          <div className="auth_input_div">
+            <label>Password</label>
             <AppTextInput
               type="password"
               placeholder="Password"
@@ -83,7 +88,11 @@ const LoginPage = (props) => {
               />
               <label className="form-check-label"> Remember me</label>
             </div>
-            <p className="forgot-password" onClick={Forgetpasswordpage}>
+            <p
+              className="forgot-password"
+              style={{ color: "#605BFF" }}
+              onClick={Forgetpasswordpage}
+            >
               Forgot password?
             </p>
           </div>
@@ -92,12 +101,21 @@ const LoginPage = (props) => {
           </div>
           <ToastContainer />
           <div className="last-container">
-            <p onClick={() => getHomePage()}>
+            <p
+              onClick={() => getHomePage()}
+              style={{ color: "#444", marginTop: "24px" }}
+            >
               Don't have an account yet ?
-              <b className="join-trippr"> Join trippr.co.in</b>
+              <b className="join-trippr" style={{ color: "#605BFF" }}>
+                {" "}
+                Join trippr.co.in
+              </b>
             </p>
           </div>
         </form>
+      </div>
+      <div className="auth_image_container">
+        <img src={Image} alt="" className="auth_image" />
       </div>
     </div>
   );

@@ -1,50 +1,87 @@
-.sideBarContainer{
-    height: 100% ;
-    width: 100%;
-    margin:0;
-    padding: 0;
+.sideBarContainer {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #fafafb;
+  font-family: "Nunito", sans-serif;
 }
-.sidebar_mainHeader{
-    margin-bottom: 50px;
+.sidebar_mainHeader {
+  margin-bottom: 50px;
+  margin-top: 25px;
+  text-align: center;
 }
-.sidebar_mainHeader img{
-    width: 90%;
+.sidebar_mainHeader img {
+  width: 90%;
 }
 
-.sideBar{
-    height: 100% !important;
-    width: 100%;
+.sideBar {
+  height: 100% !important;
+  width: 100%;
 }
 
-.flex-column{
-    height: 50%;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-bottom: 50px;
+.flex-column {
+  height: 50%;
+  gap: 16px;
+  margin-bottom: 50px;
+  padding-left: 12px;
 }
-.flex-column p{
-    color: #686868;
-    width: 70%;
+.flex-column p {
+  color: #686868;
+  width: 70%;
 }
-.colSidebar{
-    height: 100% !important;
+#main_row {
+  gap: 0.8%;
 }
-.colRightBar{
-    background-color: #1E1E1E;
-    border-left: solid 2px #f7bc07;
-    position: relative;
+#colSidebar {
+  width: 14%;
+  border-radius: 8px;
+  height: 97vh;
+  background-color: #fafafb;
+  font-family: "Nunito", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 4px;
+  padding-right: 4px;
 }
-.nav-link{
-color: #686868;
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 600;
-font-size: 20px;
-line-height: 24px;
-display: flex;
-gap: 15px;
-width: 70%;
+#colRightBar {
+  width: 85%;
+  border-radius: 8px;
+  background-color: #fafafb;
+  padding-top: 16px;
 }
-.nav-link:focus, .nav-link:hover, .nav-link:active{
-    color: #FF5151;
+.colSidebar {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+.colRightBar {
+  background-color: #fff;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+.nav-link {
+  color: #686868;
+  font-style: normal;
+
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  gap: 8px;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+}
+.nav-link:focus,
+.nav-link:hover,
+.nav-link:active {
+  color: #ff5151;
+}
+
+.nav-link img {
+  width: 16px;
+  height: 16px;
 }

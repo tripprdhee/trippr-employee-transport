@@ -26,9 +26,19 @@ body {
   /* overflow: auto; */
   box-sizing: border-box;
   scroll-behavior: smooth;
-
-  background: #1E1E1E !important;
+  background-color: #fafafb;
   color: #fafafa;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 *,
@@ -84,8 +94,6 @@ body {
 .pac-container .pac-item .pac-icon {
   display: none;
 }
-
-
 
 @media only screen and (max-width: 767px) {
   body {
